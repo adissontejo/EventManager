@@ -7,7 +7,7 @@ import {
 } from 'typeorm';
 
 @Entity('events')
-export default class Event {
+class Event {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -26,3 +26,5 @@ export default class Event {
   @UpdateDateColumn()
   updated_at: Date;
 }
+
+export default Event;
