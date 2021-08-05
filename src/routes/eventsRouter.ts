@@ -1,15 +1,11 @@
-import { Request, Response, Router } from 'express';
+import { Router } from 'express';
 
-import { getEventsRepository } from '../repositories';
+import { ListEventsController } from '../controllers';
 
 const eventsRouter = Router();
 
-eventsRouter.get('/', async (req: Request, res: Response) => {
-  const eventsRepository = getEventsRepository();
+const listEvents = new ListEventsController();
 
-  const events = await eventsRepository.find();
-
-  return res.json(events);
-});
+eventsRouter.get('/', listEvents.handle);
 
 export default eventsRouter;

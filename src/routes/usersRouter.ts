@@ -1,15 +1,11 @@
-import { Request, Response, Router } from 'express';
+import { Router } from 'express';
 
-import { getUsersRepository } from '../repositories';
+import { ListUsersController } from '../controllers';
 
 const usersRouter = Router();
 
-usersRouter.get('/', async (req: Request, res: Response) => {
-  const usersRepository = getUsersRepository();
+const listUsers = new ListUsersController();
 
-  const users = await usersRepository.find();
-
-  return res.json(users);
-});
+usersRouter.get('/', listUsers.handle);
 
 export default usersRouter;

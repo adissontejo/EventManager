@@ -1,6 +1,6 @@
 import { getRepository } from 'typeorm';
 
-import { Event } from '../entities';
+import { Event } from '../models';
 
 const getEventsRepository = () => {
   return getRepository(Event);
