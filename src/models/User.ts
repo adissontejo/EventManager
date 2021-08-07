@@ -4,7 +4,10 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
+
+import Event from './Event';
 
 @Entity('users')
 class User {
@@ -20,11 +23,14 @@ class User {
   @Column()
   password: string;
 
-  @CreateDateColumn()
-  created_at: Date;
+  @OneToMany(() => Event, event => event.creator)
+  createdEvents: Event[];
 
-  @UpdateDateColumn()
-  updated_at: Date;
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: Date;
+
+  @UpdateDateColumn({ name: 'updated_at' })
+  updatedAt: Date;
 }
 
 export default User;
