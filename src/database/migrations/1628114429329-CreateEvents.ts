@@ -1,10 +1,8 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export default class EventsMigration1628114429329
-  implements MigrationInterface
-{
+export default class CreateEvents1628114429329 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
-    queryRunner.createTable(
+    await queryRunner.createTable(
       new Table({
         name: 'events',
         columns: [
@@ -28,6 +26,10 @@ export default class EventsMigration1628114429329
             type: 'timestamp',
           },
           {
+            name: 'creator_id',
+            type: 'uuid',
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',
@@ -38,11 +40,20 @@ export default class EventsMigration1628114429329
             default: 'now()',
           },
         ],
+        foreignKeys: [
+          {
+            columnNames: ['creator_id'],
+            referencedTableName: 'users',
+            referencedColumnNames: ['id'],
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE',
+          },
+        ],
       })
     );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    queryRunner.query('DROP TABLE events');
+    await queryRunner.dropTable('events');
   }
 }

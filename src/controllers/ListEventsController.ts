@@ -6,7 +6,10 @@ class ListEventsController {
   async handle(request: Request, response: Response) {
     const listEvents = new ListEventsService();
 
-    const events = await listEvents.execute(request.body);
+    const events = await listEvents.execute({
+      ...request.body,
+      ...request.query,
+    });
 
     return response.json(events);
   }

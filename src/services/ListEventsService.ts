@@ -14,7 +14,10 @@ class ListUsersService {
 
     const filters = ignoreUndefinedFilters({ id, name, description, date });
 
-    const events = await eventsRepository.find(filters);
+    const events = await eventsRepository.find({
+      where: filters,
+      relations: ['creator'],
+    });
 
     return events;
   }
