@@ -5,6 +5,8 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
 
 import Event from './Event';
@@ -25,6 +27,23 @@ class User {
 
   @OneToMany(() => Event, event => event.creator)
   createdEvents: Event[];
+
+  @ManyToMany(() => Event, event => event.participants, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  @JoinTable({
+    name: 'participants',
+    joinColumn: {
+      name: 'user_id',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'event_id',
+      referencedColumnName: 'id',
+    },
+  })
+  events: Event[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

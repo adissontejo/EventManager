@@ -16,7 +16,7 @@ class ListUsersService {
 
     const events = await eventsRepository.find({
       where: filters,
-      relations: ['creator'],
+      relations: ['creator', 'participants'],
     });
 
     return events;

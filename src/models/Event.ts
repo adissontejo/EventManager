@@ -3,6 +3,7 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -30,6 +31,9 @@ class Event {
   })
   @JoinColumn({ name: 'creator_id' })
   creator: User;
+
+  @ManyToMany(() => User, user => user.events)
+  participants: User[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
