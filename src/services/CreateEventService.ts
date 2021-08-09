@@ -1,3 +1,4 @@
+import { checkMissingParams } from '../functions';
 import { getEventsRepository } from '../repositories';
 
 type params = {
@@ -9,6 +10,8 @@ type params = {
 
 class CreateEventService {
   async execute({ name, description, date, creatorId }: params) {
+    checkMissingParams({ name, description, date, creatorId });
+
     const eventsRepository = getEventsRepository();
 
     const creator = {

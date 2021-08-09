@@ -21,6 +21,7 @@ export default class CreateParticipants1628349407817
         ],
         foreignKeys: [
           {
+            name: 'FK_user',
             columnNames: ['user_id'],
             referencedTableName: 'users',
             referencedColumnNames: ['id'],
@@ -28,6 +29,7 @@ export default class CreateParticipants1628349407817
             onUpdate: 'CASCADE',
           },
           {
+            name: 'FK_event',
             columnNames: ['event_id'],
             referencedTableName: 'events',
             referencedColumnNames: ['id'],
@@ -37,12 +39,14 @@ export default class CreateParticipants1628349407817
         ],
       })
     );
+
     await queryRunner.createIndex(
       'participants',
       new TableIndex({
         columnNames: ['user_id'],
       })
     );
+
     await queryRunner.createIndex(
       'participants',
       new TableIndex({

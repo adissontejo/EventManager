@@ -42,6 +42,7 @@ export default class CreateEvents1628114429329 implements MigrationInterface {
         ],
         foreignKeys: [
           {
+            name: 'FK_user',
             columnNames: ['creator_id'],
             referencedTableName: 'users',
             referencedColumnNames: ['id'],

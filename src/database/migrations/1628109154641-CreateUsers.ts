@@ -20,7 +20,6 @@ export default class CreateUsers1628109154641 implements MigrationInterface {
           {
             name: 'email',
             type: 'varchar',
-            isUnique: true,
           },
           {
             name: 'password',
@@ -35,6 +34,12 @@ export default class CreateUsers1628109154641 implements MigrationInterface {
             name: 'updated_at',
             type: 'timestamp',
             default: 'now()',
+          },
+        ],
+        uniques: [
+          {
+            name: 'UQ_email',
+            columnNames: ['email'],
           },
         ],
       })

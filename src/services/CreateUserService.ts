@@ -1,3 +1,4 @@
+import { checkMissingParams } from '../functions';
 import { getUsersRepository } from '../repositories';
 
 type params = {
@@ -8,15 +9,25 @@ type params = {
 
 class CreateUserService {
   async execute({ name, email, password }: params) {
-    const usersRepository = getUsersRepository();
+    try {
+      checkMissingParams({ name, email, password });
 
-    const user = await usersRepository.save({
-      name,
-      email,
-      password,
-    });
+      const usersRepository = getUsersRepository();
 
-    return user;
+      const user = await usersRepository.save({
+        name,
+        email,
+        password,
+      });
+
+      return user;
+    } catch (err) {
+      if (err.message.match(/duplicate key value.*UQ_email.*/)) {
+        throw new Error('Email is already registered.');
+      }
+
+      throw err;
+    }
   }
 }
 

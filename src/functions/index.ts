@@ -1,2 +1,2 @@
-// eslint-disable-next-line import/prefer-default-export
+export { default as checkMissingParams } from './checkMissingParams';
 export { default as ignoreUndefinedFilters } from './ignoreUndefinedFilters';
