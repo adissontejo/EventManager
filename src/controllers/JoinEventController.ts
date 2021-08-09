@@ -9,7 +9,7 @@ class JoinEventController {
     await joinEvent.execute(request.body);
 
     return response.json({
-      message: 'Suscessfully joined.',
+      message: 'User has successfully joined.',
     });
   }
 }

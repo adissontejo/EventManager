@@ -6,8 +6,6 @@ const handleErrors = (
   response: Response,
   next: NextFunction
 ) => {
-  console.log(error);
-
   if (error instanceof Error) {
     return response.status(400).json({ error: error.message });
   }
