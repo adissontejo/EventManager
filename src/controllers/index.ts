@@ -6,3 +6,5 @@ export { default as JoinEventController } from './JoinEventController';
 export { default as LeaveEventController } from './LeaveEventController';
 export { default as ListEventsController } from './ListEventsController';
 export { default as ListUsersController } from './ListUsersController';
+export { default as UpdateEventController } from './UpdateEventController';
+export { default as UpdateUserController } from './UpdateUserController';

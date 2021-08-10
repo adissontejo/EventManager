@@ -1,4 +1,4 @@
-const ignoreUndefinedFilters = (filters: Object) => {
+const ignoreUndefinedParams = (filters: Object) => {
   const ret = Object.entries(filters).reduce((acc, [key, value]) => {
     if (value !== undefined) {
       return { ...acc, [key]: value };
@@ -10,4 +10,4 @@ const ignoreUndefinedFilters = (filters: Object) => {
   return ret;
 };
 
-export default ignoreUndefinedFilters;
+export default ignoreUndefinedParams;

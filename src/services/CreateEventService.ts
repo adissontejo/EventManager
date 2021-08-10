@@ -21,7 +21,7 @@ class CreateEventService {
     const event = await eventsRepository.save({
       name,
       description,
-      date: new Date(date),
+      date,
       creator,
       participants: [creator],
     });

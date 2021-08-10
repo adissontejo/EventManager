@@ -6,3 +6,5 @@ export { default as JoinEventService } from './JoinEventService';
 export { default as LeaveEventService } from './LeaveEventService';
 export { default as ListEventsService } from './ListEventsService';
 export { default as ListUsersService } from './ListUsersService';
+export { default as UpdateEventService } from './UpdateEventService';
+export { default as UpdateUserService } from './UpdateUserService';

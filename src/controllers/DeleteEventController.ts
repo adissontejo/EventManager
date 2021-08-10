@@ -9,7 +9,7 @@ class DeleteEventController {
     await deleteEvent.execute(request.body);
 
     return response.json({
-      message: 'Event has been successfully deleted',
+      message: 'Event has been successfully deleted.',
     });
   }
 }

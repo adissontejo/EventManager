@@ -1,4 +1,4 @@
-import { ignoreUndefinedFilters } from '../functions';
+import { ignoreUndefinedParams } from '../functions';
 import { getEventsRepository } from '../repositories';
 
 type params = {
@@ -10,9 +10,9 @@ type params = {
 
 class ListUsersService {
   async execute({ id, name, description, date }: params) {
-    const eventsRepository = getEventsRepository();
+    const filters = ignoreUndefinedParams({ id, name, description, date });
 
-    const filters = ignoreUndefinedFilters({ id, name, description, date });
+    const eventsRepository = getEventsRepository();
 
     const events = await eventsRepository.find({
       where: filters,

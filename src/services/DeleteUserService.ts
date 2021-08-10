@@ -2,16 +2,16 @@ import { checkMissingParams } from '../functions';
 import { getUsersRepository } from '../repositories';
 
 type params = {
-  userId: string;
+  id: string;
 };
 
 class DeleteUserService {
-  async execute({ userId }: params) {
-    checkMissingParams({ userId });
+  async execute({ id }: params) {
+    checkMissingParams({ id });
 
     const usersRepository = getUsersRepository();
 
-    await usersRepository.delete(userId);
+    await usersRepository.delete(id);
   }
 }
 

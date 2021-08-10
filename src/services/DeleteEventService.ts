@@ -2,16 +2,16 @@ import { checkMissingParams } from '../functions';
 import { getEventsRepository } from '../repositories';
 
 type params = {
-  eventId: string;
+  id: string;
 };
 
 class DeleteEventService {
-  async execute({ eventId }: params) {
-    checkMissingParams({ eventId });
+  async execute({ id }: params) {
+    checkMissingParams({ id });
 
     const eventsRepository = getEventsRepository();
 
-    await eventsRepository.delete(eventId);
+    await eventsRepository.delete(id);
   }
 }
 
