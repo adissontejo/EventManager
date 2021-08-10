@@ -13,13 +13,13 @@ import Event from './Event';
 
 @Entity('users')
 class User {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn()
   id: string;
 
   @Column()
   name: string;
 
-  @Column({ unique: true })
+  @Column()
   email: string;
 
   @Column()
@@ -28,10 +28,7 @@ class User {
   @OneToMany(() => Event, event => event.creator)
   createdEvents: Event[];
 
-  @ManyToMany(() => Event, event => event.participants, {
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
-  })
+  @ManyToMany(() => Event, event => event.participants)
   @JoinTable({
     name: 'participants',
     joinColumn: {

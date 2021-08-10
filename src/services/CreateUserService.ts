@@ -1,3 +1,5 @@
+import { hash } from 'bcryptjs';
+
 import { checkMissingParams } from '../functions';
 import { getUsersRepository } from '../repositories';
 
@@ -14,10 +16,12 @@ class CreateUserService {
 
       const usersRepository = getUsersRepository();
 
+      const hashPassword = await hash(password, 8);
+
       const user = await usersRepository.save({
         name,
         email,
-        password,
+        password: hashPassword,
       });
 
       return user;

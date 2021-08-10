@@ -1,3 +1,5 @@
+import { hash } from 'bcryptjs';
+
 import { checkMissingParams, ignoreUndefinedParams } from '../functions';
 import { getUsersRepository } from '../repositories';
 
@@ -12,7 +14,16 @@ class UpdateUserService {
   async execute({ id, name, email, password }: params) {
     checkMissingParams({ id });
 
-    const newData = ignoreUndefinedParams({ name, email, password });
+    const newData = ignoreUndefinedParams<params>({
+      id,
+      name,
+      email,
+      password,
+    });
+
+    if (password) {
+      newData.password = await hash(password, 8);
+    }
 
     const usersRepository = getUsersRepository();
 

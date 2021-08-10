@@ -12,7 +12,12 @@ class UpdateEventService {
   async execute({ id, name, description, date }: params) {
     checkMissingParams({ id });
 
-    const newData = ignoreUndefinedParams({ name, description, date });
+    const newData = ignoreUndefinedParams<params>({
+      id,
+      name,
+      description,
+      date,
+    });
 
     const eventsRepository = getEventsRepository();
 

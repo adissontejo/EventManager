@@ -13,7 +13,7 @@ import User from './User';
 
 @Entity('events')
 class Event {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn()
   id: string;
 
   @Column()
@@ -25,10 +25,7 @@ class Event {
   @Column()
   date: Date;
 
-  @ManyToOne(() => User, user => user.createdEvents, {
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
-  })
+  @ManyToOne(() => User, user => user.createdEvents)
   @JoinColumn({ name: 'creator_id' })
   creator: User;
 

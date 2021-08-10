@@ -9,7 +9,7 @@ type params = {
 
 class ListUsersService {
   async execute({ id, name, email }: params) {
-    const filters = ignoreUndefinedParams({ id, name, email });
+    const filters = ignoreUndefinedParams<params>({ id, name, email });
 
     const usersRepository = getUsersRepository();
 

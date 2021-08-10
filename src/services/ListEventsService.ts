@@ -10,7 +10,12 @@ type params = {
 
 class ListUsersService {
   async execute({ id, name, description, date }: params) {
-    const filters = ignoreUndefinedParams({ id, name, description, date });
+    const filters = ignoreUndefinedParams<params>({
+      id,
+      name,
+      description,
+      date,
+    });
 
     const eventsRepository = getEventsRepository();
 
