@@ -1,12 +1,12 @@
-import { checkMissingParams } from '../functions';
-import { getEventsRepository } from '../repositories';
+import { checkMissingParams } from '~/functions';
+import { getEventsRepository } from '~/repositories';
 
 type params = {
   eventId: string;
   userId: string;
 };
 
-class LeaveEventService {
+class LeaveEvent {
   async execute({ eventId, userId }: params) {
     checkMissingParams({ eventId, userId });
 
@@ -16,4 +16,4 @@ class LeaveEventService {
   }
 }
 
-export default LeaveEventService;
+export default LeaveEvent;

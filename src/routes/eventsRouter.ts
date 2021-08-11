@@ -1,38 +1,21 @@
 import { Router } from 'express';
 
-import {
-  CreateEventController,
-  DeleteEventController,
-  JoinEventController,
-  LeaveEventController,
-  ListEventsController,
-  UpdateEventController,
-} from '../controllers';
+import { EventsController } from '~/controllers';
 
 const eventsRouter = Router();
 
-const createEvent = new CreateEventController();
+const eventsController = new EventsController();
 
-const deleteEvent = new DeleteEventController();
+eventsRouter.post('/', eventsController.create);
 
-const joinEvent = new JoinEventController();
+eventsRouter.delete('/', eventsController.delete);
 
-const leaveEvent = new LeaveEventController();
+eventsRouter.post('/join', eventsController.join);
 
-const listEvents = new ListEventsController();
+eventsRouter.delete('/leave', eventsController.leave);
 
-const updateEvent = new UpdateEventController();
+eventsRouter.get('/', eventsController.list);
 
-eventsRouter.post('/', createEvent.handle);
-
-eventsRouter.delete('/', deleteEvent.handle);
-
-eventsRouter.post('/join', joinEvent.handle);
-
-eventsRouter.delete('/leave', leaveEvent.handle);
-
-eventsRouter.get('/', listEvents.handle);
-
-eventsRouter.put('/', updateEvent.handle);
+eventsRouter.put('/', eventsController.update);
 
 export default eventsRouter;

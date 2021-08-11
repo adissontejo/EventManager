@@ -1,5 +1,5 @@
-import { ignoreUndefinedParams } from '../functions';
-import { getEventsRepository } from '../repositories';
+import { ignoreUndefinedParams } from '~/functions';
+import { getEventsRepository } from '~/repositories';
 
 type params = {
   id?: string;
@@ -8,7 +8,7 @@ type params = {
   date?: Date;
 };
 
-class ListUsersService {
+class ListEvents {
   async execute({ id, name, description, date }: params) {
     const filters = ignoreUndefinedParams<params>({
       id,
@@ -28,4 +28,4 @@ class ListUsersService {
   }
 }
 
-export default ListUsersService;
+export default ListEvents;

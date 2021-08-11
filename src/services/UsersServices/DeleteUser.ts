@@ -1,11 +1,11 @@
-import { checkMissingParams } from '../functions';
-import { getUsersRepository } from '../repositories';
+import { checkMissingParams } from '~/functions';
+import { getUsersRepository } from '~/repositories';
 
 type params = {
   id: string;
 };
 
-class DeleteUserService {
+class DeleteUser {
   async execute({ id }: params) {
     checkMissingParams({ id });
 
@@ -15,4 +15,4 @@ class DeleteUserService {
   }
 }
 
-export default DeleteUserService;
+export default DeleteUser;

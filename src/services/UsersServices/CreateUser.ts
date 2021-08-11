@@ -1,7 +1,7 @@
 import { hash } from 'bcryptjs';
 
-import { checkMissingParams } from '../functions';
-import { getUsersRepository } from '../repositories';
+import { checkMissingParams } from '~/functions';
+import { getUsersRepository } from '~/repositories';
 
 type params = {
   name: string;
@@ -9,7 +9,7 @@ type params = {
   password: string;
 };
 
-class CreateUserService {
+class CreateUser {
   async execute({ name, email, password }: params) {
     try {
       checkMissingParams({ name, email, password });
@@ -24,6 +24,8 @@ class CreateUserService {
         password: hashPassword,
       });
 
+      delete user.password;
+
       return user;
     } catch (err) {
       if (err.message.match(/duplicate key value.*UQ_email.*/)) {
@@ -35,4 +37,4 @@ class CreateUserService {
   }
 }
 
-export default CreateUserService;
+export default CreateUser;

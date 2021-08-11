@@ -1,6 +1,6 @@
 import { EntityRepository, getCustomRepository, Repository } from 'typeorm';
 
-import { Event } from '../models';
+import { Event } from '~/models';
 
 @EntityRepository(Event)
 class EventsRepository extends Repository<Event> {

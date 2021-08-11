@@ -1,7 +1,7 @@
 import { hash } from 'bcryptjs';
 
-import { checkMissingParams, ignoreUndefinedParams } from '../functions';
-import { getUsersRepository } from '../repositories';
+import { checkMissingParams, ignoreUndefinedParams } from '~/functions';
+import { getUsersRepository } from '~/repositories';
 
 type params = {
   id: string;
@@ -10,7 +10,7 @@ type params = {
   password?: string;
 };
 
-class UpdateUserService {
+class UpdateUser {
   async execute({ id, name, email, password }: params) {
     checkMissingParams({ id });
 
@@ -31,4 +31,4 @@ class UpdateUserService {
   }
 }
 
-export default UpdateUserService;
+export default UpdateUser;

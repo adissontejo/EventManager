@@ -1,6 +1,6 @@
 import { getRepository } from 'typeorm';
 
-import { User } from '../models';
+import { User } from '~/models';
 
 const getUsersRepository = () => {
   return getRepository(User);

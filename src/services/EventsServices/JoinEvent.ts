@@ -1,12 +1,12 @@
-import { checkMissingParams } from '../functions';
-import { getEventsRepository } from '../repositories';
+import { checkMissingParams } from '~/functions';
+import { getEventsRepository } from '~/repositories';
 
 type params = {
   userId: string;
   eventId: string;
 };
 
-class JoinEventService {
+class JoinEvent {
   async execute({ eventId, userId }: params) {
     try {
       checkMissingParams({ eventId, userId });
@@ -34,4 +34,4 @@ class JoinEventService {
   }
 }
 
-export default JoinEventService;
+export default JoinEvent;

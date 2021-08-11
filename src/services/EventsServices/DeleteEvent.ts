@@ -1,11 +1,11 @@
-import { checkMissingParams } from '../functions';
-import { getEventsRepository } from '../repositories';
+import { checkMissingParams } from '~/functions';
+import { getEventsRepository } from '~/repositories';
 
 type params = {
   id: string;
 };
 
-class DeleteEventService {
+class DeleteEvent {
   async execute({ id }: params) {
     checkMissingParams({ id });
 
@@ -15,4 +15,4 @@ class DeleteEventService {
   }
 }
 
-export default DeleteEventService;
+export default DeleteEvent;

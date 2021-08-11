@@ -1,5 +1,5 @@
-import { ignoreUndefinedParams } from '../functions';
-import { getUsersRepository } from '../repositories';
+import { ignoreUndefinedParams } from '~/functions';
+import { getUsersRepository } from '~/repositories';
 
 type params = {
   id?: string;
@@ -7,7 +7,7 @@ type params = {
   email?: string;
 };
 
-class ListUsersService {
+class ListUsers {
   async execute({ id, name, email }: params) {
     const filters = ignoreUndefinedParams<params>({ id, name, email });
 
@@ -22,4 +22,4 @@ class ListUsersService {
   }
 }
 
-export default ListUsersService;
+export default ListUsers;

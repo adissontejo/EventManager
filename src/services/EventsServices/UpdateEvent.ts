@@ -1,5 +1,5 @@
-import { checkMissingParams, ignoreUndefinedParams } from '../functions';
-import { getEventsRepository } from '../repositories';
+import { checkMissingParams, ignoreUndefinedParams } from '~/functions';
+import { getEventsRepository } from '~/repositories';
 
 type params = {
   id: string;
@@ -8,7 +8,7 @@ type params = {
   date?: Date;
 };
 
-class UpdateEventService {
+class UpdateEvent {
   async execute({ id, name, description, date }: params) {
     checkMissingParams({ id });
 
@@ -25,4 +25,4 @@ class UpdateEventService {
   }
 }
 
-export default UpdateEventService;
+export default UpdateEvent;

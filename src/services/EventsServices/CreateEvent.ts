@@ -1,5 +1,5 @@
-import { checkMissingParams } from '../functions';
-import { getEventsRepository } from '../repositories';
+import { checkMissingParams } from '~/functions';
+import { getEventsRepository } from '~/repositories';
 
 type params = {
   name: string;
@@ -8,7 +8,7 @@ type params = {
   creatorId: string;
 };
 
-class CreateEventService {
+class CreateEvent {
   async execute({ name, description, date, creatorId }: params) {
     checkMissingParams({ name, description, date, creatorId });
 
@@ -30,4 +30,4 @@ class CreateEventService {
   }
 }
 
-export default CreateEventService;
+export default CreateEvent;
