@@ -1,16 +1,16 @@
 import { NextFunction, Request, Response } from 'express';
 
 const handleErrors = (
-  error: Error,
-  request: Request,
-  response: Response,
+  err: Error,
+  req: Request,
+  res: Response,
   next: NextFunction
 ) => {
-  if (error instanceof Error) {
-    return response.status(400).json({ error: error.message });
+  if (err instanceof Error) {
+    return res.status(400).json({ error: err.message });
   }
 
-  return response.status(500).json({
+  return res.status(500).json({
     status: 'error',
     message: 'Internal Server Error',
   });

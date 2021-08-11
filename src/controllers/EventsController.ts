@@ -45,7 +45,7 @@ class EventsController {
   async list(req: Request, res: Response) {
     const listEvents = new ListEventsService();
 
-    const events = await listEvents.execute(req.body);
+    const events = await listEvents.execute({ ...req.body, ...req.query });
 
     return res.json(events);
   }

@@ -1,2 +1,2 @@
-/* eslint-disable import/prefer-default-export */
+export { default as ensureAuthenticated } from './ensureAuthenticated';
 export { default as handleErrors } from './handleErrors';
