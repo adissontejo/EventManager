@@ -2,26 +2,28 @@ import { checkMissingParams } from '~/functions';
 import { getEventsRepository } from '~/repositories';
 
 type params = {
-  userId: string;
-  eventId: string;
+  id: string;
+  auth: {
+    userId: string;
+  };
 };
 
 class JoinEvent {
-  async execute({ eventId, userId }: params) {
+  async execute({ id, auth }: params) {
+    checkMissingParams({ id });
+
+    const eventsRepository = getEventsRepository();
+
     try {
-      checkMissingParams({ eventId, userId });
-
-      const eventsRepository = getEventsRepository();
-
-      await eventsRepository.addParticipant(eventId, userId);
+      await eventsRepository.addParticipant(id, auth.userId);
     } catch (err) {
       if (err instanceof Error) {
         if (err.message.match(/insert.*violates foreign key.*FK_user.*/)) {
-          throw new Error('User does not exist.');
+          throw new Error('Invalid user.');
         }
 
         if (err.message.match(/insert.*violates foreign key.*FK_event/)) {
-          throw new Error('Event does not exist.');
+          throw new Error('Invalid event.');
         }
 
         if (err.message.match(/duplicate key value.*/)) {

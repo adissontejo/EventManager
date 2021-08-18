@@ -1,35 +1,33 @@
-import { hash } from 'bcryptjs';
-
 import { checkMissingParams } from '~/functions';
 import { getUsersRepository } from '~/repositories';
 
-type params = {
+type restParams = {
   name: string;
   email: string;
+};
+
+type params = restParams & {
   password: string;
 };
 
 class CreateUser {
   async execute({ name, email, password }: params) {
+    checkMissingParams({ name, email, password });
+
+    const usersRepository = getUsersRepository();
+
     try {
-      checkMissingParams({ name, email, password });
-
-      const usersRepository = getUsersRepository();
-
-      const hashPassword = await hash(password, 8);
-
-      const user = await usersRepository.save({
+      const user = await usersRepository.createWithEncrypt(password, {
         name,
         email,
-        password: hashPassword,
       });
-
-      delete user.password;
 
       return user;
     } catch (err) {
-      if (err.message.match(/duplicate key value.*UQ_email.*/)) {
-        throw new Error('Email is already registered.');
+      if (err instanceof Error) {
+        if (err.message.match(/duplicate key value.*UQ_email.*/)) {
+          throw new Error('Email is already registered.');
+        }
       }
 
       throw err;

@@ -3,15 +3,27 @@ import { getEventsRepository } from '~/repositories';
 
 type params = {
   id: string;
+  auth: {
+    userId: string;
+  };
 };
 
 class DeleteEvent {
-  async execute({ id }: params) {
+  async execute({ id, auth }: params) {
     checkMissingParams({ id });
 
     const eventsRepository = getEventsRepository();
 
-    await eventsRepository.delete(id);
+    const results = await eventsRepository.delete({
+      id,
+      creator: {
+        id: auth.userId,
+      },
+    });
+
+    if (results.affected === 0) {
+      throw new Error('Invalid user or event.');
+    }
   }
 }
 

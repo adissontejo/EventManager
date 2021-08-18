@@ -1,48 +1,52 @@
-import { compare, hash } from 'bcryptjs';
-
-import { checkMissingParams, ignoreUndefinedParams } from '~/functions';
+import { ignoreUndefinedParams } from '~/functions';
 import { getUsersRepository } from '~/repositories';
 
 type updateParams = {
   name?: string;
   email?: string;
-  password: string;
 };
 
 type params = updateParams & {
-  userId: string;
-  oldPassword: string;
+  auth: {
+    userId: string;
+  };
+  password?: string;
+  oldPassword?: string;
 };
 
 class UpdateUser {
-  async execute({ userId, name, email, password, oldPassword }: params) {
+  async execute({ auth, name, email, password, oldPassword }: params) {
     const newData = ignoreUndefinedParams<updateParams>({
       name,
       email,
-      password,
     });
 
     const usersRepository = getUsersRepository();
 
     if (password) {
       if (!oldPassword) {
-        throw new Error('Missing param: oldPassword.');
+        throw new Error('Missing param(s): oldPassword.');
       }
 
-      const user = await usersRepository.findOne(userId, {
-        select: ['password'],
-      });
+      const results = await usersRepository.updateWithEncrypt(
+        auth.userId,
+        password,
+        oldPassword,
+        newData
+      );
 
-      const passwordMatch = await compare(oldPassword, user.password);
-
-      if (!passwordMatch) {
-        throw new Error('Old password does not match.');
+      if (results.affected === 0) {
+        throw new Error('Invalid user or password.');
       }
 
-      newData.password = await hash(password, 8);
+      return;
     }
 
-    await usersRepository.update(userId, newData);
+    const results = await usersRepository.update(auth.userId, newData);
+
+    if (results.affected === 0) {
+      throw new Error('Invalid user.');
+    }
   }
 }
 

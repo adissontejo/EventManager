@@ -10,25 +10,23 @@ const ensureAuthenticated = (
   res: Response,
   next: NextFunction
 ) => {
+  if (!req.headers.authorization) {
+    throw new Error('Missing token.');
+  }
+
+  const [, token] = req.headers.authorization?.split(' ');
+
   try {
-    const [, token] = req.headers.authorization?.split(' ');
-
-    if (!token) {
-      throw new Error('');
-    }
-
     const { sub } = verify(token, process.env.PRIVATE_KEY) as Payload;
 
-    req.locals = {
+    res.locals.auth = {
       userId: sub,
     };
-
-    return next();
-  } catch (e) {
-    console.log(e.message);
-
+  } catch (err) {
     throw new Error('Invalid token.');
   }
+
+  return next();
 };
 
 export default ensureAuthenticated;

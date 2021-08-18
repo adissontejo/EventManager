@@ -13,7 +13,7 @@ class EventsController {
   async create(req: Request, res: Response) {
     const createEvent = new CreateEventService();
 
-    const event = await createEvent.execute(req.body);
+    const event = await createEvent.execute({ ...res.locals, ...req.body });
 
     return res.json(event);
   }
@@ -21,7 +21,7 @@ class EventsController {
   async delete(req: Request, res: Response) {
     const deleteEvent = new DeleteEventService();
 
-    await deleteEvent.execute(req.body);
+    await deleteEvent.execute({ ...res.locals, ...req.body });
 
     return res.json({ message: 'Event has been succesfully deleted.' });
   }
@@ -29,7 +29,7 @@ class EventsController {
   async join(req: Request, res: Response) {
     const joinEvent = new JoinEventService();
 
-    await joinEvent.execute(req.body);
+    await joinEvent.execute({ ...res.locals, ...req.body });
 
     return res.json({ message: 'User has succesfully joined.' });
   }
@@ -37,7 +37,7 @@ class EventsController {
   async leave(req: Request, res: Response) {
     const leaveEvent = new LeaveEventService();
 
-    await leaveEvent.execute(req.body);
+    await leaveEvent.execute({ ...res.locals, ...req.body });
 
     return res.json({ message: 'User has succesfully left.' });
   }
@@ -53,7 +53,7 @@ class EventsController {
   async update(req: Request, res: Response) {
     const updateEvent = new UpdateEventService();
 
-    await updateEvent.execute(req.body);
+    await updateEvent.execute({ ...res.locals, ...req.body });
 
     return res.json({ message: 'Event has been succesfully updated.' });
   }

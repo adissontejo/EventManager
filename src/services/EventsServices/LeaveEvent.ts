@@ -2,17 +2,19 @@ import { checkMissingParams } from '~/functions';
 import { getEventsRepository } from '~/repositories';
 
 type params = {
-  eventId: string;
-  userId: string;
+  id: string;
+  auth: {
+    userId: string;
+  };
 };
 
 class LeaveEvent {
-  async execute({ eventId, userId }: params) {
-    checkMissingParams({ eventId, userId });
+  async execute({ id, auth }: params) {
+    checkMissingParams({ id });
 
     const eventsRepository = getEventsRepository();
 
-    await eventsRepository.removeParticipant(eventId, userId);
+    await eventsRepository.removeParticipant(id, auth.userId);
   }
 }
 

@@ -1,21 +1,22 @@
 import { Router } from 'express';
 
 import { EventsController } from '~/controllers';
+import { ensureAuthenticated } from '~/middlewares';
 
 const eventsRouter = Router();
 
 const eventsController = new EventsController();
 
-eventsRouter.post('/', eventsController.create);
+eventsRouter.post('/', ensureAuthenticated, eventsController.create);
 
-eventsRouter.delete('/', eventsController.delete);
+eventsRouter.delete('/', ensureAuthenticated, eventsController.delete);
 
-eventsRouter.post('/join', eventsController.join);
+eventsRouter.post('/join', ensureAuthenticated, eventsController.join);
 
-eventsRouter.delete('/leave', eventsController.leave);
+eventsRouter.delete('/leave', ensureAuthenticated, eventsController.leave);
 
 eventsRouter.get('/', eventsController.list);
 
-eventsRouter.put('/', eventsController.update);
+eventsRouter.put('/', ensureAuthenticated, eventsController.update);
 
 export default eventsRouter;

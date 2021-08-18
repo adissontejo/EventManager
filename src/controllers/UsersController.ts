@@ -28,7 +28,7 @@ class UsersController {
   async delete(req: Request, res: Response) {
     const deleteUser = new DeleteUserService();
 
-    await deleteUser.execute({ ...req.locals, ...req.body });
+    await deleteUser.execute({ ...res.locals, ...req.body });
 
     return res.json({ message: 'User has been succesfully deleted.' });
   }
@@ -44,7 +44,7 @@ class UsersController {
   async update(req: Request, res: Response) {
     const updateUser = new UpdateUserService();
 
-    await updateUser.execute({ ...req.locals, ...req.body });
+    await updateUser.execute({ ...res.locals, ...req.body });
 
     return res.json({ message: 'User has been succesfully updated.' });
   }

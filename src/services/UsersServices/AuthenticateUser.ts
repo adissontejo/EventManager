@@ -1,4 +1,3 @@
-import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 
 import { checkMissingParams } from '~/functions';
@@ -15,18 +14,11 @@ class AuthenticateUser {
 
     const usersRepository = getUsersRepository();
 
-    const user = await usersRepository.findOne({
-      where: { email },
-      select: ['id', 'password'],
-    });
+    const user = await usersRepository.authenticateWithEncrypt(email, password);
+
+    console.log(user);
 
     if (!user) {
-      throw new Error('Invalid email or password.');
-    }
-
-    const passwordMatch = await compare(password, user.password);
-
-    if (!passwordMatch) {
       throw new Error('Invalid email or password.');
     }
 
