@@ -1,0 +1,17 @@
+services:
+  app:
+    build: .
+    command: yarn dev
+    volumes:
+      - .:/usr/app
+    depends_on:
+      - db
+    ports:
+      - "3000:3000"
+  db:
+    image: postgres:13.4-alpine
+    environment:
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE}
+    
