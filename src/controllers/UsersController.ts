@@ -14,7 +14,9 @@ class UsersController {
 
     const token = await authenticateUser.execute(req.body);
 
-    return res.json({ token });
+    res.setHeader('Authorization', `Bearer ${token}`);
+
+    return res.json({ message: 'Succesfully logged in.' });
   }
 
   async create(req: Request, res: Response) {

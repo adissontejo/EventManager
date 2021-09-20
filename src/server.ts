@@ -4,6 +4,6 @@ import './database';
 
 import app from './app';
 
-app.listen(3000, () => {
+app.listen(process.env.APP_PORT, () => {
   console.log('Server is running...');
 });
