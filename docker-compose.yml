@@ -9,6 +9,7 @@ services:
     ports:
       - ${APP_PORT}:${APP_PORT}
     environment:
+      APP_PORT: ${APP_PORT}
       DATABASE_HOST: db
       DATABASE_PORT: 5432
   db:

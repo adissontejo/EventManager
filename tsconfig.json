@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "lib": ["es5", "es6", "esnext.asynciterable"],
-    "target": "es5",
+    "target": "es2017",
     "module": "commonjs",
     "moduleResolution": "node",
     "outDir": "./dist",
@@ -10,6 +10,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "sourceMap": true,
+    "typeRoots": ["./node_modules/@types", "./src/@types"],
     "baseUrl": ".",
     "paths": {
       "~/*": ["src/*"]
